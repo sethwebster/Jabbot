@@ -65,6 +65,11 @@
   <ItemGroup>
     <Compile Include="Bot.cs" />
     <Compile Include="Core\IBot.cs" />
+    <Compile Include="Migrations\201204240040561_Initial.cs" />
+    <Compile Include="Migrations\201204240040561_Initial.Designer.cs">
+      <DependentUpon>201204240040561_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChatMessage.cs" />
     <Compile Include="Models\ChatUser.cs" />
     <Compile Include="Models\IJabbotDataContext.cs" />

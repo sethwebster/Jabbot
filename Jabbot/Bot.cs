@@ -16,12 +16,13 @@ using Jabbot.Models;
 using System.Reflection;
 using System.Web.Management;
 using SignalR.Client.Transports;
+using System.Data.Entity;
+using Jabbot.Migrations;
 
 namespace Jabbot
 {
     public class Bot : IBot
     {
-
         private const string ExtensionsFolder = "Sprockets";
 
         private readonly string _password = string.Empty;
@@ -49,8 +50,8 @@ namespace Jabbot
 
         public Bot(string url, string name, string password)
         {
-            InitializeGlobalEvents();
-           
+            InitializeEnvironment();
+
             Name = name;
             _url = url;
             _password = password;
@@ -58,6 +59,12 @@ namespace Jabbot
             InitializeClient();
             CreateCompositionContainer();
             InitializeContainer();
+        }
+
+        private void InitializeEnvironment()
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<JabbotDataContext,Configuration>());
+            InitializeGlobalEvents();
         }
 
         private void InitializeGlobalEvents()
